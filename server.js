@@ -3,6 +3,10 @@ var sys = require('sys');
 var http = require("http");
 var exec = require("child_process").exec;
 var server = http.createServer(function(request, response) {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Request-Method', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'GET');
+  response.setHeader('Access-Control-Allow-Headers', '*');
 	if(request.url==="/api/getdistance"){
 exec("python ultra.py", function (error, stdout, stderr) {
   sys.print('stdout: ' + stdout);
