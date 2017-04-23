@@ -8,7 +8,7 @@
 <!-- versionCode is optional and Android only -->
 
   <name>Home Automation</name>
-
+  <content src="control.html"/>
   <description>
       Control everything!
   </description>
