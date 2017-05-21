@@ -33,7 +33,7 @@ exec("python /home/pi/relayOn.py "+URLParams[4], function (error, stdout, stderr
     console.log('exec error: ' + error);
   }
 response.writeHead(200, { 'Content-Type': 'application/json'});
-response.end("{device:"+URLParams[4]+",status:'on'}");
+response.end("{}");
 
 
 });		
@@ -46,7 +46,7 @@ exec("python /home/pi/relayOff.py "+URLParams[4], function (error, stdout, stder
     console.log('exec error: ' + error);
   }
 response.writeHead(200, { 'Content-Type': 'application/json'});
-response.end("{device:"+URLParams[4]+"},status:'off'");
+response.end("{}");
 
 
 });		

@@ -93,11 +93,15 @@ input:checked + .slider:before {
   <div class="slider round"></div>
 </label>
 <br>
-<label class="displaLabel">Water Pump</label>
+<label class="displaLabel">Stairs Light</label>
 <label class="switch">
   <input type="checkbox" value="off" data-pin="11">
   <div class="slider round"></div>
 </label>
+
+<div class="errorMsg" style="color:red">
+  
+</div>
 
 <script type="text/javascript">
   /*! jQuery v3.2.1 | (c) JS Foundation and other contributors | jquery.org/license */
@@ -108,8 +112,25 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
     var change = $(this).val();
     var pin = $(this).data("pin");
     var url = "http://192.168.1.100/api/device/"+change+"/"+pin;
+    var strData = "";
     $.get({
       url:url
+    }).done(function(d){
+      $(".errorMsg").html("Success");
+      $(".errorMsg").css("color","green");
+      $.each(d, function(key, value){
+        strData = key + ": " + value;
+        console.log(key + ": " + value);
+      });
+      $(".errorMsg").html("Success"+strData);
+    }).fail(function(d){
+      $(".errorMsg").html("Failed");
+      $(".errorMsg").css("color","red");
+      $.each(d, function(key, value){
+        strData = key + ": " + value;
+        console.log(key + ": " + value);
+      });
+      $(".errorMsg").html("Failed"+strData);
     });
     if(change==="off"){
       change= "on";
