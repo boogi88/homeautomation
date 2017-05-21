@@ -11,7 +11,7 @@ var server = http.createServer(function(request, response) {
   response.setHeader('Access-Control-Allow-Methods', 'GET');
   response.setHeader('Access-Control-Allow-Headers', '*');
 	if(request.url==="/api/getdistance"){
-exec("python ultra.py", function (error, stdout, stderr) {
+exec("python /home/pi/ultra.py", function (error, stdout, stderr) {
   sys.print('stdout: ' + stdout);
   sys.print('stderr: ' + stderr);
   if (error !== null) {
@@ -26,7 +26,7 @@ response.end("{currentDistance:"+stdout+"}");
 var URLParams = request.url.split("/");
 console.log(URLParams[3]);
 	if(URLParams[3]==="on"){
-exec("python relayOn.py "+URLParams[4], function (error, stdout, stderr) {
+exec("python /home/pi/relayOn.py "+URLParams[4], function (error, stdout, stderr) {
   sys.print('stdout: ' + stdout);
   sys.print('stderr: ' + stderr);
   if (error !== null) {
@@ -39,7 +39,7 @@ response.end("{device:"+URLParams[4]+",status:'on'}");
 });		
 	}
 if(URLParams[3]==="off"){
-exec("python relayOff.py "+URLParams[4], function (error, stdout, stderr) {
+exec("python /home/pi/relayOff.py "+URLParams[4], function (error, stdout, stderr) {
   sys.print('stdout: ' + stdout);
   sys.print('stderr: ' + stderr);
   if (error !== null) {
@@ -54,7 +54,7 @@ response.end("{device:"+URLParams[4]+"},status:'off'");
 
 if(request.url==="*" || request.url==="/"){
   console
-    fs.readFile('./control.html', function(error, content) {
+    fs.readFile('/home/pi/control.html', function(error, content) {
     if (error) {
       response.writeHead(500);
       console.log("Unable to read file");
