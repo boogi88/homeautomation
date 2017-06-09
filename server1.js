@@ -4,6 +4,11 @@ var http = require("http");
 var exec = require("child_process").exec;
 var path = require("path");
 var fs = require("fs");
+
+/*Confs*/
+var sensorMiniumDistanceFromWater =17;
+var sensorMaximumDistanceFromWater =40;
+
 var server = http.createServer(function(request, response) {
   console.log(request.url);
   response.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,8 +22,9 @@ exec("python /home/pi/ultra.py", function (error, stdout, stderr) {
   if (error !== null) {
     console.log('exec error: ' + error);
   }
+  stdout = stdout.replace(/(\r\n|\n|\r)/gm,"");
 response.writeHead(200, { 'Content-Type': 'application/json'});
-response.end("{currentDistance:"+stdout+"}");
+response.end("{\"currentDistance\":"+stdout+",\"sensorMaximumDistanceFromWater\":"+sensorMaximumDistanceFromWater+",\"sensorMiniumDistanceFromWater\":"+sensorMiniumDistanceFromWater+"}");
 
 
 });
@@ -53,7 +59,6 @@ response.end("{}");
 	}
 
 if(request.url==="*" || request.url==="/"){
-  console
     fs.readFile('/home/pi/control.html', function(error, content) {
     if (error) {
       response.writeHead(500);

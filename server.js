@@ -53,7 +53,6 @@ response.end("{device:"+URLParams[4]+"},status:'off'");
 	}
 
 if(request.url==="*" || request.url==="/"){
-  console
     fs.readFile('./control.html', function(error, content) {
     if (error) {
       response.writeHead(500);
