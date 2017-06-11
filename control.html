@@ -211,10 +211,8 @@ function setWaterLevel(){
     "url": "http://192.168.1.100/api/getdistance",
     "type": "GET"
   }).done(function(data){
-    var sensorMiniumDistanceFromWater =data.sensorMiniumDistanceFromWater;
-    var sensorMaximumDistanceFromWater =data.sensorMaximumDistanceFromWater;
-    tankCurrentLevelInPrecentage = sensorMiniumDistanceFromWater/data.currentDistance*100;
-    rand=100-tankCurrentLevelInPrecentage;
+    tankCurrentLevelInPrecentage = (data.currentDistance-data.sensorMiniumDistanceFromWater)*100/((data.sensorMaximumDistanceFromWater-data.sensorMiniumDistanceFromWater));
+    rand=tankCurrentLevelInPrecentage;
       if (
           (
                  keyframes.type === keyframes.KEYFRAMES_RULE
